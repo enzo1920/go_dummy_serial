@@ -11,7 +11,7 @@ import (
 	"github.com/tarm/serial"
 )
 
-const AppVersion = "1.0.6 beta"
+const AppVersion = "1.0.8 beta"
 
 func check(e error) {
 	if e != nil {
@@ -53,6 +53,7 @@ func Comparer(need_to_comp []byte, fname string) bool {
 		//os.Exit(0)
 	} else {
 		fmt.Printf("\nNot found in: %v", need_to_comp)
+		log.Printf("\nNot found in: %v", need_to_comp)
 		comp = false
 		//buf = buf[:0]
 		//tmp_buf = tmp_buf[:0]
@@ -146,7 +147,7 @@ func main() {
 					break
 				}
 				//clear tmp_buf
-				fmt.Printf("\nadd to buf! now  buffer contains :%v %s", buf, buf)
+				//fmt.Printf("\nadd to buf! now  buffer contains :%v %s", buf, buf)
 				tmp_buf = tmp_buf[:0]
 
 			}
@@ -155,6 +156,8 @@ func main() {
 		if Comparer(buf, fileresults) {
 			os.Exit(0)
 		}
+
+		buf = buf[:0]
 
 	}
 }
