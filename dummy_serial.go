@@ -149,6 +149,7 @@ func main() {
 				//clear tmp_buf
 				//fmt.Printf("\nadd to buf! now  buffer contains :%v %s", buf, buf)
 				tmp_buf = tmp_buf[:0]
+				k = 0
 
 			}
 		}
@@ -158,6 +159,7 @@ func main() {
 		}
 
 		buf = buf[:0]
+		n = 0
 
 	}
 }
