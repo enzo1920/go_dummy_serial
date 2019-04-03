@@ -29,9 +29,9 @@ func reverse(array_byte []byte) []byte {
 }
 
 func Comparer(need_to_comp []byte, fname string) bool {
-	byte_arr := []byte("= ")
+	byte_arr := []byte("= -")
 	var comp bool
-	if need_to_comp[0] == byte_arr[0] && need_to_comp[7] == byte_arr[1] {
+	if need_to_comp[0] == byte_arr[0] && (need_to_comp[7] == byte_arr[1] || need_to_comp[7] == byte_arr[2]) {
 		fmt.Println("Found! exit!")
 		log.Printf("\n 0x3d and 0x20 found in place [0] and [7] exit!")
 		fmt.Printf("Found! %s\n", need_to_comp)
