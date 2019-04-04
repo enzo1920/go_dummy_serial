@@ -81,6 +81,11 @@ func Exists(name string) bool {
 
 func main() {
 
+	log.Printf(
+		"Starting the service...\ncommit: %s, build time: %s, release: %s",
+		version.Commit, version.BuildTime, version.Release,
+	)
+
 	fmt.Println(AppVersion)
 
 	fileresults := "./results.txt"
