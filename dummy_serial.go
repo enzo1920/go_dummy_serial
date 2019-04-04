@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/enzo1920/go_dummy_serial/tree/master/version"
+	"github.com/enzo1920/go_dummy_serial/master/version"
 	"github.com/tarm/serial"
 )
 
