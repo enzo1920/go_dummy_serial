@@ -11,7 +11,7 @@ import (
 	"github.com/tarm/serial"
 )
 
-const AppVersion = "1.0.8 beta"
+const AppVersion = "1.0.10 beta"
 
 func check(e error) {
 	if e != nil {
@@ -45,10 +45,20 @@ func Comparer(need_to_comp []byte, fname string) bool {
 		f, err := os.OpenFile(fname, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
 		check(err)
 		defer f.Close()
-		//chislo:=reverse(need_to_comp[1:7])
-		n2, err := f.Write(need_to_comp[1:7])
-		check(err)
-		fmt.Printf("wrote %d bytes\n", n2)
+		//если - , то записываем число с минусом
+		if need_to_comp[7] == byte_arr[2] {
+			//chislo:=reverse(need_to_comp[1:7])
+			need_to_comp[0] = need_to_comp[7]
+			n2, err := f.Write(need_to_comp[:7])
+			check(err)
+			fmt.Printf("wrote %d bytes\n", n2)
+
+		} else {
+
+			n2, err := f.Write(need_to_comp[1:7])
+			check(err)
+			fmt.Printf("wrote %d bytes\n", n2)
+		}
 
 		//os.Exit(0)
 	} else {
@@ -114,40 +124,30 @@ func main() {
 	buf := make([]byte, 8)
 	tmp_buf := make([]byte, 8)
 
-	//buf1 :=buf[:n]
 	for {
 		n, errr := stream.Read(buf)
 		check(errr)
-		//fmt.Printf("\ni read: %v", n)
-		//fmt.Printf("\nbuffer:%v", buf)
 		if n < len(buf) {
 			for {
 
 				k, errr := stream.Read(tmp_buf)
 				check(errr)
 				if k > 0 {
-					//fmt.Printf("\ni read k-bytes: %v", k)
-					//fmt.Printf("\ntmp_buf:%v", tmp_buf)
-					//fmt.Printf("\n k n: %v %v", k,n)
 					for i := 0; i < k; i++ {
-						//fmt.Printf("\n len buf: %v %v ", len(buf), n)
 						if n >= len(buf) {
 							//fmt.Printf("\n stop need compare!")
 							break
 						} else {
-							//fmt.Printf("\n tmp_buf[i]: %v ", tmp_buf[i])
+
 							buf[n+i] = tmp_buf[i]
 
 						}
-						//fmt.Printf("\n add to buf! now  buffer contains :%v %s", buf, buf)
-
 					}
 					n = n + k
 				} else {
 					break
 				}
 				//clear tmp_buf
-				//fmt.Printf("\nadd to buf! now  buffer contains :%v %s", buf, buf)
 				tmp_buf = tmp_buf[:0]
 				k = 0
 
@@ -157,7 +157,6 @@ func main() {
 		if Comparer(buf, fileresults) {
 			os.Exit(0)
 		}
-
 		buf = buf[:0]
 		n = 0
 
