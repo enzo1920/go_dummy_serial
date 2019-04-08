@@ -31,5 +31,5 @@ log in current dir with *.log
 
 ## Authors
 
-***Sergei Larichkin** - - https://github.com/enzo1920/
+***Sergei Lari** - - https://github.com/enzo1920/
 
