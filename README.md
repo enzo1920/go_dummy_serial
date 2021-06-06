@@ -1,10 +1,10 @@
-# Simple serial port reader
+# Для чего
 Программа предназначена для чтения данных с весов. 
 Данные считываются с COM-порта.
 
 
 ## Getting Started
-This app for read som COM-port and write results to results.txt
+This app for read  COM-port and write results to results.txt
 
 ## Prerequisites for build
 
